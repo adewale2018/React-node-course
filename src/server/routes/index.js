@@ -4,7 +4,8 @@ import postController from '../controllers/postController';
 
 const route = express.Router();
 
-route.get('/', postController.getPosts);
+route.get('/posts', postController.getPosts);
+route.post('/post', postController.createPost);
 
 
 

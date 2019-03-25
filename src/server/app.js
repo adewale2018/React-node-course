@@ -2,7 +2,10 @@ import express from 'express';
 import dotenv from 'dotenv';
 import chalk from 'chalk';
 import morgan from 'morgan';
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+
+
 import route from './routes'
 
 dotenv.config();
@@ -19,10 +22,14 @@ mongoose.connection.on('error', err => {
   }
 });
 
-app.use('/', route);
 app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 
+
+
+app.use('/', route);
 
 
 app.listen(process.env.PORT, () => {
