@@ -1,14 +1,26 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import chalk from 'chalk';
+import morgan from 'morgan';
+import mongoose from 'mongoose'
+import route from './routes'
+
 dotenv.config();
 const app = express();
 
 
+//connection to database
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true})
+.then(() => console.log('Successfully connected to database'))
 
-app.get('/', (req, res) => {
-  res.send('Today is another begining of a week, Monday...');
+mongoose.connection.on('error', err => {
+  if(err) {
+    console.log('There is DB connection Error: ' + err.message);
+  }
 });
+
+app.use('/', route);
+app.use(morgan('dev'));
 
 
 
