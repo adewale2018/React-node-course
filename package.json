@@ -1,0 +1,31 @@
+{
+  "name": "react-node-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node src/server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adewale2018/React-node-course.git"
+  },
+  "author": "Saheed Adewale Shittu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adewale2018/React-node-course/issues"
+  },
+  "homepage": "https://github.com/adewale2018/React-node-course#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.2",
+    "chalk": "^2.4.2",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "dotenv": "^7.0.0"
+  }
+}
