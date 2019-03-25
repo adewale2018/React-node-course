@@ -4,6 +4,7 @@ import chalk from 'chalk';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import expressValidator from 'express-validator';
 
 
 import route from './routes'
@@ -25,6 +26,7 @@ mongoose.connection.on('error', err => {
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(expressValidator());
 
 
 
