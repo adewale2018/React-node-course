@@ -27,6 +27,16 @@ const validateRequestBody = (request) => {
             .trim()
             .isLength(4, 2000);
           break;
+        
+        case 'email':
+          request.check('email', 'Email address field cannot be empty')
+            .trim()
+            .notEmpty();
+
+          request.check('email', 'Email is badly formatted')
+            .trim()
+            .isEmail();
+          break;
 
         case 'password':
           request.check('password', 'Password field cannot be empty')
