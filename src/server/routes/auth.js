@@ -2,12 +2,12 @@ import express from 'express';
 
 
 import signupController from '../controllers/auth';
-// import VaidateRequest from '../middlewares/validateRequest';
+import ValidateRequest from '../middlewares/validateRequest';
 
 
 const route = express.Router();
 
-route.post('/signup', signupController.signup);
+route.post('/signup', ValidateRequest, signupController.signup);
 
 
 
