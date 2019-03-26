@@ -19,7 +19,7 @@ const validateRequestBody = (request) => {
           break;
         
         case 'body':
-          request.check('body', 'Title field cannot be empty')
+          request.check('body', 'Body field cannot be empty')
             .trim()
             .notEmpty()
             .matches(/\w/);

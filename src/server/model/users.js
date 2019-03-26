@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import uuidv1 from 'uuid/v1';
+import crypto from 'crypto';
  
 const userSchema = new mongoose.Schema({
   username: {
@@ -18,10 +20,37 @@ const userSchema = new mongoose.Schema({
   salt: String,
   created: {
     type: Date,
-    default: DataCue.now
+    default: Date.now
   },
   updated: Date
 
 });
+
+userSchema.virtual('password')
+.set(function(password){
+  // create temporary variable called _password
+  this._password = password
+  //generate a timestamp
+  this.salt = uuidv1()
+  //encryptPassword()
+  this.hashed_password = this.encryptPassword(password)
+})
+.get(function(){
+  return this._password
+})
+
+// methods
+userSchema.methods = {
+  encryptPassword: function(password){
+    if(!password) return "";
+    try {
+      return crypto.createHmac('sha256', this.salt)
+      .update(password)
+      .digest('hex');
+    } catch(err) {
+      return ""
+    }
+  }
+}
 
 module.exports = mongoose.model('User', userSchema);
