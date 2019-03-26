@@ -7,7 +7,8 @@ import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
 
 
-import route from './routes'
+import postRoute from './routes'
+import signupRoute from './routes/auth'
 
 dotenv.config();
 const app = express();
@@ -31,7 +32,8 @@ app.use(expressValidator());
 
 
 
-app.use('/', route);
+app.use('/', postRoute);
+app.use('/', signupRoute);
 
 
 app.listen(process.env.PORT, () => {
