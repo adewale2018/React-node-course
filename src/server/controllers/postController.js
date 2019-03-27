@@ -10,15 +10,27 @@ export default {
       })
     }) 
     .catch((err) => {
-      console.log(err);
+      console.log(`The error in getting the posts is ${err}`);
     });
   },
   createPost: (req, res) => {
     const post = new Post(req.body);
-    post.save()
-    .then(result => {
+    // post.save()
+    // .then(result => {
+    //   res.status(201).json({
+    //     post: result
+    //   });
+    // });
+    post.save((err, result) => {
+      if(err){
+        return res.status(400).json({
+          err: err
+        });
+      }
       res.status(201).json({
-        post: result
+        message: 'Post created successfully!',
+        // post: result
+
       });
     });
   }

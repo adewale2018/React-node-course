@@ -1,18 +1,14 @@
 import express from 'express';
+const app = express();
 import dotenv from 'dotenv';
 import chalk from 'chalk';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import expressValidator from 'express-validator';
 
-
-import postRoute from './routes'
-import signupRoute from './routes/auth'
-
 dotenv.config();
-const app = express();
-
 
 //connection to database
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true})
@@ -24,17 +20,15 @@ mongoose.connection.on('error', err => {
   }
 });
 
+// Route
+import routes from './routes'
+
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
 app.use(expressValidator());
-
-
-
-
-app.use('/', postRoute);
-app.use('/', signupRoute);
-
+app.use('/', routes);
 
 app.listen(process.env.PORT, () => {
   console.log(chalk.white.bgWhite.bold(`My Server is connected and started serving on PORT ${process.env.PORT}`));
