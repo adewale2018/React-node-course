@@ -50,6 +50,18 @@ const validateRequestBody = (request) => {
             .isLength({ min: 7 }).matches(/\w/);
           break;
 
+        case 'username':
+          request.check('username', 'username field cannot be empty')
+            .trim()
+            .notEmpty();
+          request.check('username', 'username must be more than 5 characters')
+            .trim()
+            .isLength(6, 100);
+          request.check('username', 'username should contain only numbers or alphabets')
+            .trim()
+            .matches(/^[0-9a-zA-Z]+$/);
+          break;
+
         case 'newPassword':
           request.check('newPassword', 'newPassword field cannot be empty')
             .trim()
@@ -106,24 +118,8 @@ const validateRequestBody = (request) => {
             .trim()
             .matches(/\w/);
           break;
-        case 'name':
-          request.check(
-            'name',
-            'name field cannot be empty',
-          )
-            .trim()
-            .notEmpty();
-          request.check('name', 'name must be more than 5 characters')
-            .trim()
-            .isLength(5, 100);
-          request.check(
-            'name',
-            'name should contain only alphabets',
-          )
-            .trim()
-            .matches(/\w/);
-          break;
-          case 'officeName':
+        
+        case 'officeName':
           request.check(
             'officeName',
             'officeName field cannot be empty',
@@ -140,7 +136,7 @@ const validateRequestBody = (request) => {
             .trim()
             .matches(/\w/);
           break;
-          case 'type':
+        case 'type':
           request.check(
             'type',
             'type field cannot be empty',
